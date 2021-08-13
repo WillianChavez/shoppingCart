@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!--Google fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Kufam:wght@500&family=Mukta+Malar:wght@300&display=swap" rel="stylesheet" />
+
+        <!--Google icons-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+        <!--CSS-->
+        <link rel="stylesheet" href="./CSS/styles.css" />
+        <title>Shopping Cart</title>
+    </head>
+    <body>
+        <!--Header___________________________________________________________-->
+        <header class="header">
+            <h1 class="header__title">
+                <span class="material-icons material-icons-outlined icon-cart"> shopping_cart </span>
+
+                <span>Shopping Cart</span>
+            </h1>
+        </header>
+
+        <!--add Products______________________________________________________-->
+        <div class="container">
+            <h2 class="container__title">Add your Products!</h2>
+            <form class="add-products" action="#">
+                <div class="field">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="ID" class="field__input" />
+                </div>
+
+                <div class="field">
+                    <label for="price">Price:</label>
+                    <input type="text" name="price" id="price" class="field__input"/>
+                </div>
+
+                <div class="field">
+                    <label for="amount">Amount:</label>
+                    <input type="text" name="amount" id="amount" class="field__input"/>
+                </div>
+                <span class="material-icons material-icons-outlined icon-add-cart"> add_shopping_cart </span>
+                <input type="submit" value="" />
+            </form>
+        </div>
+
+        <!--Added products____________________________________________________-->
+        <div class="container">
+            <h2 class="container__title">Add your Products!</h2>
+            <section class="added-products">
+                <table class="table">
+                    <thead>
+                        <tr class="table__header">
+                            <th class="table__title">Name</th>
+                            <th class="table__title">Price</th>
+                            <th class="table__title">Amount</th>
+                        </tr>
+                    </thead>
+                    <tr class="table__row-product">
+                        <td class="row-text">Fries</td>
+                        <td class="row-text">$22.50</td>
+                        <td class="row-text">23</td>
+                        <td><a class="material-icons-outlined material-icons icon-delete"> delete </a></td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </body>
+</html>

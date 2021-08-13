@@ -1,0 +1,83 @@
+:root {
+    --primary-color: #fff;
+    --secondary-color: #000;
+    --bg-color: #000427;
+    --line-input: #94f8ff;
+    --trash-color: #ff0000;
+    --add-color: #17ce17;
+
+    --font-size-header: 1.5rem;
+    --font-size-title: 1.3rem;
+    --font-size-text: .8rem;
+}
+/*GENERAL STYLES*/
+* {
+    box-sizing: border-box;
+}
+
+
+body,
+.header__title,
+.header {
+    display: flex;
+}
+body {
+    /*Settings*/
+    margin: 0;
+    padding: 0;
+    font-family: 'Kufam', 'Mukta Malar', sans-serif;
+
+    flex-direction: column;
+    align-items:center;
+    /*styles*/
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.header {
+    margin: 1rem 0.75rem;
+
+    align-self: flex-end;
+
+}
+.header__title {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-header);
+
+    align-items: center;
+    justify-content: space-around;
+    width: 16rem;
+    padding: 0.25em 0.5em;
+    border-radius: 10px;
+}
+
+.icon-cart {
+    font-size: 2.5rem;
+    transform: rotate(-40deg);
+}
+
+.container{
+    width: 80%;
+}
+
+.container__title{
+    font-size:var(--font-size-title);
+}
+.add-products{
+    display: flex;
+    justify-content: space-around;
+    padding: 0 1.5rem;
+    font-size: var(--font-size-text);
+}
+.field__input{
+    appearance: none;
+    background:none;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    text-align: center;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--line-input);
+}
