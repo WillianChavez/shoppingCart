@@ -13,6 +13,8 @@
     --font-size-header: 2rem;
     --font-size-title: 1.5rem;
     --font-size-text: 1rem;
+    
+    --icon-size:2.5rem;
 }
 /*GENERAL STYLES*/
 * {
@@ -128,7 +130,7 @@ body {
     width: 80%;
 }
 
-.container__title{
+.title{
     font-size:var(--font-size-title);
 }
 
@@ -136,14 +138,17 @@ body {
 .add-products{
     display: flex;
     justify-content: space-around;
+    align-items:center;
     padding: 0 1.5rem;
     font-size: var(--font-size-text);
 }
-.field__input{
+.field__input,.submit{
     appearance: none;
     box-shadow: none;
     border: none;
     outline: none;
+}
+.field__input{
     
     border-radius: 5px;
     height:30px;
@@ -159,3 +164,56 @@ body {
 }
 
 
+
+.add-products__send{
+    position: relative;
+    
+}
+.icon-add-cart{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: var(--icon-size);
+    color:var(--green);
+    z-index:-1;
+}
+.submit{
+    width:var(--icon-size);
+    height:var(--icon-size);
+    background-color: transparent;
+    cursor: pointer;
+
+}
+
+/*Added products*/
+.added-products{
+    padding: 0 4rem ;
+}
+
+.table{
+    width:70vw;
+    background-color: var(--white);
+    color:var(--black);
+    border-radius: 30px;
+}
+
+.table__header,.table__row-product{
+    display: grid;
+    grid-template-columns:repeat(3,1fr) 100px;
+    justify-items: center;
+}
+
+.table__row-product{
+    border-bottom: 1px groove rgb(185, 185, 185);
+    align-items: center;
+}
+
+.table__row-product:last-child{
+    border-bottom: none;
+}
+.icon-delete{
+    color: var(--red);
+    font-size:var(--icon-size);
+    border: none;
+    cursor: pointer;
+}

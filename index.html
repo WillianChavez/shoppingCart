@@ -38,7 +38,7 @@
         <main class="main">
             <!--add Products______________________________________________________-->
             <div class="container">
-                <h2 class="container__title">Add your Products!</h2>
+                <h2 class="title">Add your Products!</h2>
                 <form class="add-products" action="#">
                     <div class="field">
                         <label for="name">Name:</label>
@@ -54,14 +54,16 @@
                         <label for="amount">Amount:</label>
                         <input type="text" name="amount" id="amount" class="field__input"  autocomplete="None"/>
                     </div>
-                    <span class="material-icons material-icons-outlined icon-add-cart"> add_shopping_cart </span>
-                    <input type="submit" value="" />
+                    <div class="add-products__send">
+                        <span class="material-icons material-icons-outlined icon-add-cart"> add_shopping_cart </span>
+                        <input type="submit" value="" class="submit"/>
+                    </div>
                 </form>
             </div>
 
             <!--Added products____________________________________________________-->
             <div class="container">
-                <h2 class="container__title">Add your Products!</h2>
+                <h2 class="title">Add your Products!</h2>
                 <section class="added-products">
                     <table class="table">
                         <thead>
@@ -75,7 +77,7 @@
                             <td class="row-text">Fries</td>
                             <td class="row-text">$22.50</td>
                             <td class="row-text">23</td>
-                            <td><a class="material-icons-outlined material-icons icon-delete"> delete </a></td>
+                            <td><button class="material-icons-outlined material-icons icon-delete"> delete </button></td>
                         </tr>
                     </table>
                 </section>
