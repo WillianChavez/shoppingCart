@@ -1,5 +1,6 @@
 export default class Model {
     constructor(dbName, dbVersion, view) {
+        // properties
         this.dbName = dbName
         this.dbVersion = dbVersion
         this.view = view
@@ -8,6 +9,7 @@ export default class Model {
         this.open(this.dbName, this.dbVersion)
     }
 
+    // open conecction
     open(dbName, dbVersion) {
         this.dbName = dbName
         this.dbVersion = dbVersion
@@ -38,6 +40,7 @@ export default class Model {
         }
     }
 
+    // add product in database
     add(product) {
         let transaction = this.db.transaction(['Carrito'], 'readwrite')
         let store = transaction.objectStore('Carrito')

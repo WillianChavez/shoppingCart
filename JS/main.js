@@ -2,12 +2,20 @@ import View from './Components/View.js'
 import Model from './Components/Model.js'
 
 const form = document.getElementById('formAddProducts')
+<<<<<<< HEAD
 const tableProducts = document.getElementById('table-products')
+=======
+
+// Initialixe the objects
+>>>>>>> 7f074735220d8f9bcc4775e34c88512bc04c90db
 let view, model
 
+// return the clone of some object
 const cloneJSON = (obj) => {
     return JSON.parse(JSON.stringify(obj))
 }
+
+// listener  load window
 addEventListener('load', () => {
     const dbName = 'ShoppingCart'
     const dbVersion = 1
@@ -16,6 +24,7 @@ addEventListener('load', () => {
     view.setModel(model)
 })
 
+// listener submit form
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     let name, price, quantity
@@ -27,12 +36,14 @@ form.addEventListener('submit', (e) => {
 
     quantity = e.target.quantity.value
 
+    // model product object
     const data = {
         name,
         price,
         quantity,
     }
 
+    // add product in database
     model.add(cloneJSON(data))
     e.target.reset()
 })
