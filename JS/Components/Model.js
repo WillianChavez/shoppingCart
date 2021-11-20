@@ -1,15 +1,16 @@
 export default class Model {
     constructor(dbName, dbVersion, view) {
+        // properties
         this.dbName = dbName
         this.dbVersion = dbVersion
         this.products
         this.view = view
+        this.db
 
         this.open(this.dbName, this.dbVersion)
-
-        this.db
     }
 
+    // open conecction
     open(dbName, dbVersion) {
         this.dbName = dbName
         this.dbVersion = dbVersion
@@ -41,6 +42,7 @@ export default class Model {
         }
     }
 
+    // add product in database
     add(product) {
         let transaction = this.db.transaction(['Carrito'], 'readwrite')
         let store = transaction.objectStore('Carrito')
@@ -59,6 +61,7 @@ export default class Model {
         }
     }
 
+    // get All products from database
     getAll() {
         let transaction = this.db.transaction(['Carrito'])
         let store = transaction.objectStore('Carrito')
@@ -76,6 +79,7 @@ export default class Model {
         }
     }
 
+    // get end index of database
     getEndIndex() {
         const transaction = this.db.transaction(['Carrito'])
         const store = transaction.objectStore('Carrito')
@@ -95,6 +99,7 @@ export default class Model {
         }
     }
 
+    // delete a product from database
     delete(index) {
         const transaction = this.db.transaction(['Carrito'], 'readwrite')
         const store = transaction.objectStore('Carrito')

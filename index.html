@@ -52,13 +52,23 @@
                     <div class="field">
                         <label for="price">Price:</label>
                         <div class="price">
-                            <input type="number" name="price" id="price" class="field__input" required required placeholder="0.00" autocomplete="off" pattern="$[0-9]" />
+                            <input
+                                type="number"
+                                name="price"
+                                id="price"
+                                class="field__input"
+                                step="any"
+                                required
+                                placeholder="0.00"
+                                autocomplete="off"
+                                pattern="$[0-9]"
+                            />
                         </div>
                     </div>
 
                     <div class="field">
-                        <label for="amount">Amount:</label>
-                        <input type="number" name="amount" id="amount" class="field__input" required autocomplete="off" />
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" name="quantity" id="quantity" class="field__input" required autocomplete="off" />
                     </div>
                     <div class="add-products__send">
                         <span class="material-icons material-icons-outlined icon-add-cart"> add_shopping_cart </span>
@@ -76,13 +86,13 @@
                             <tr class="table__header">
                                 <th class="table__title">Name</th>
                                 <th class="table__title">Price</th>
-                                <th class="table__title">Amount</th>
+                                <th class="table__title">Quantity</th>
                             </tr>
                         </thead>
                     </table>
                 </section>
             </div>
-            <!-- modal -->
+            <!-- modal________________________________________________________________________________-->
             <div class="modal" id="modal-products">
                 <form class="modal__content">
                     <div class="modal__header">
@@ -103,8 +113,8 @@
                         </div>
 
                         <div class="modal__field">
-                            <label for="modalAmount">Amount:</label>
-                            <input type="number" name="modalAmount" id="modalAmount" class="modal__input" required autocomplete="off" />
+                            <label for="modalQuantity">Quantity:</label>
+                            <input type="number" name="modalQuantity" id="modalQuantity" class="modal__input" required autocomplete="off" />
                         </div>
                     </div>
                     <div class="modal__footer">
