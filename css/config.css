@@ -63,3 +63,7 @@ body {
     text-align: left;
     color: var(--black);
 }
+
+.hidden {
+    transform: scale(0);
+}

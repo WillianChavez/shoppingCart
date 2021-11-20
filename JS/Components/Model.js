@@ -2,12 +2,10 @@ export default class Model {
     constructor(dbName, dbVersion, view) {
         this.dbName = dbName
         this.dbVersion = dbVersion
-        this.products
         this.view = view
+        this.db
 
         this.open(this.dbName, this.dbVersion)
-
-        this.db
     }
 
     open(dbName, dbVersion) {
@@ -25,14 +23,13 @@ export default class Model {
         request.onsuccess = () => {
             console.log('Database opened successfully')
             this.db = request.result
-            this.getAll()
+            this.readData()
         }
 
         request.onupgradeneeded = (event) => {
             this.db = event.target.result
 
-            let store = this.db.createObjectStore('Carrito', { autoIncrement: true })
-            store.createIndex('name', 'name', { unique: false })
+            let store = this.db.createObjectStore('Carrito', { keyPath: 'name' })
 
             store.transaction.oncomplete = () => {
                 this.db = event.target.result
@@ -44,13 +41,10 @@ export default class Model {
     add(product) {
         let transaction = this.db.transaction(['Carrito'], 'readwrite')
         let store = transaction.objectStore('Carrito')
-        product.id = this.view.endIndex
-        this.view.nextIndex()
         let request = store.add(product)
 
         request.onsuccess = () => {
-            this.products.push(product)
-            this.view.insertRow(product)
+            this.readData()
             console.log('Product added successfully')
         }
 
@@ -59,16 +53,14 @@ export default class Model {
         }
     }
 
-    getAll() {
+    readData() {
         let transaction = this.db.transaction(['Carrito'])
         let store = transaction.objectStore('Carrito')
         let request = store.getAll()
 
         request.onsuccess = (event) => {
-            this.products = event.target.result
-            this.getEndIndex()
-
-            console.log('getAll success')
+            this.view.render(event.target.result)
+            console.log('Data read successfully')
         }
 
         request.onerror = () => {
@@ -76,33 +68,12 @@ export default class Model {
         }
     }
 
-    getEndIndex() {
-        const transaction = this.db.transaction(['Carrito'])
-        const store = transaction.objectStore('Carrito')
-        store.openCursor(null, 'prev').onsuccess = (event) => {
-            const cursor = event.target.result
-            if (cursor) {
-                this.view.setEndIndex(cursor.key + 1)
-                console.log('End index: ' + cursor.key)
-            } else {
-                this.view.setEndIndex(1)
-            }
-            this.view.setProducts(this.products)
-            this.view.render()
-        }
-        store.openCursor(null, 'prev').onerror = () => {
-            console.log('Error retrieving end index')
-        }
-    }
-
-    delete(index) {
+    delete(key) {
         const transaction = this.db.transaction(['Carrito'], 'readwrite')
         const store = transaction.objectStore('Carrito')
-        const request = store.delete(index)
+        const request = store.delete(key)
         request.onsuccess = () => {
-            this.products = this.products.filter((product) => product.id !== product.id)
-            this.view.table.removeChild(document.getElementById(index))
-            console.log('Product deleted successfully', index)
+            this.readData()
         }
 
         request.onerror = () => {
@@ -116,7 +87,6 @@ export default class Model {
         let request = store.put(product)
 
         request.onsuccess = () => {
-            this.products.push(product)
             console.log('Product updated successfully')
         }
 

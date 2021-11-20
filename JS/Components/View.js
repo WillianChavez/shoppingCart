@@ -1,58 +1,40 @@
 export default class view {
     constructor() {
         this.table = document.getElementById('table-products')
+        this.modal = document.getElementById('modal-product')
         this.model
-        this.products = []
-        this.endIndex
     }
 
     setModel(model) {
         this.model = model
     }
-    render() {
-        this.products.forEach((product) => {
-            this.insertRow(product)
+    render(products) {
+        const header = this.table.firstElementChild
+        this.table.innerHTML = ''
+        const fragment = document.createDocumentFragment()
+        products.forEach((product) => {
+            let row = this.createRow(product)
+            fragment.append(row)
         })
+        this.table.append(header, fragment)
     }
 
-    setProducts(products) {
-        this.products = products
-    }
-
-    insertRow({ name, price, quantity, id }) {
-        const row = this.createRow(name, price, quantity, id)
-        this.table.appendChild(row)
-    }
-
-    setEndIndex(index) {
-        if (index == undefined) {
-            this.endIndex = 0
-        } else {
-            this.endIndex = index
-        }
-    }
-    nextIndex() {
-        let index = parseInt(this.endIndex) + 1
-        this.endIndex = index
-    }
-
-    createRow(productName, productPrice, productQuantity, id) {
+    createRow({ name, price, quantity }) {
         let row = document.createElement('tr')
 
         row.classList.add('table__row-product')
-        row.setAttribute('id', id)
 
-        let name = document.createElement('td')
-        let price = document.createElement('td')
-        let quantity = document.createElement('td')
+        let elementName = document.createElement('td')
+        let elementPrice = document.createElement('td')
+        let elementQuantity = document.createElement('td')
 
-        name.classList.add('row-text')
-        price.classList.add('row-text')
-        quantity.classList.add('row-text')
+        elementName.classList.add('row-text')
+        elementPrice.classList.add('row-text')
+        elementQuantity.classList.add('row-text')
 
-        name.textContent = productName
-        price.textContent = `$${productPrice}`
-        quantity.textContent = productQuantity
+        elementName.textContent = name
+        elementPrice.textContent = `$${price}`
+        elementQuantity.textContent = quantity
 
         let controls = document.createElement('td')
         let editButton = document.createElement('button')
@@ -63,27 +45,17 @@ export default class view {
         removeButton.classList.add('material-icons-outlined', 'material-icons', 'icon-delete', 'button')
         removeButton.textContent = 'delete'
 
-        controls.append(editButton, removeButton)
-        editButton.onclick = () => {
-            console.log('edit', row.id)
-        }
-        removeButton.onclick = () => {
-            this.model.delete(parseInt(row.id))
-        }
+        editButton.dataset.key = name
+        editButton.dataset.action = 'edit'
 
-        row.append(name, price, quantity, controls)
+        removeButton.dataset.key = name
+        removeButton.dataset.action = 'delete'
+
+        controls.append(editButton, removeButton)
+
+        row.append(elementName, elementPrice, elementQuantity, controls)
         return row
     }
 
-    removeRow(id) {
-        let row = document.getElementById(id)
-        this.table.removeChild(row)
-    }
-
-    updateRow({ name, price, quantity, id }) {
-        let row = document.getElementById(id)
-        row.children[0].textContent = name
-        row.children[1].textContent = `$${price}`
-        row.children[2].textContent = quantity
-    }
+    showModal() {}
 }
