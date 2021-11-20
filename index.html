@@ -42,17 +42,19 @@
                 <form class="add-products" id="formAddProducts" action="#">
                     <div class="field">
                         <label for="name">name:</label>
-                        <input type="text" name="name" id="ID" class="field__input" autocomplete="None" />
+                        <input type="text" name="name" id="ID" class="field__input" required autocomplete="off" />
                     </div>
 
                     <div class="field">
                         <label for="price">Price:</label>
-                        <input type="text" name="price" id="price" class="field__input" autocomplete="None" />
+                        <div class="price">
+                            <input type="number" name="price" id="price" class="field__input" required required placeholder="0.00" autocomplete="off" pattern="$[0-9]" />
+                        </div>
                     </div>
 
                     <div class="field">
                         <label for="amount">Amount:</label>
-                        <input type="text" name="amount" id="amount" class="field__input" autocomplete="None" />
+                        <input type="number" name="amount" id="amount" class="field__input" required autocomplete="off" />
                     </div>
                     <div class="add-products__send">
                         <span class="material-icons material-icons-outlined icon-add-cart"> add_shopping_cart </span>
@@ -76,6 +78,7 @@
                     </table>
                 </section>
             </div>
+            <!--create a -->
         </main>
         <script src="./js/main.js" type="module"></script>
     </body>

@@ -36,7 +36,6 @@ export default class Model {
 
             store.transaction.oncomplete = () => {
                 this.db = event.target.result
-                this.view.setEndIndex(0)
                 console.log('Database upgrade completed')
             }
         }
@@ -45,10 +44,13 @@ export default class Model {
     add(product) {
         let transaction = this.db.transaction(['Carrito'], 'readwrite')
         let store = transaction.objectStore('Carrito')
+        product.id = this.view.endIndex
+        this.view.nextIndex()
         let request = store.add(product)
 
         request.onsuccess = () => {
             this.products.push(product)
+            this.view.insertRow(product)
             console.log('Product added successfully')
         }
 
@@ -61,13 +63,10 @@ export default class Model {
         let transaction = this.db.transaction(['Carrito'])
         let store = transaction.objectStore('Carrito')
         let request = store.getAll()
-        console.log('getAll')
 
         request.onsuccess = (event) => {
             this.products = event.target.result
             this.getEndIndex()
-            this.view.setProducts(this.products)
-            this.view.render()
 
             console.log('getAll success')
         }
@@ -83,9 +82,13 @@ export default class Model {
         store.openCursor(null, 'prev').onsuccess = (event) => {
             const cursor = event.target.result
             if (cursor) {
-                this.view.setEndIndex(cursor.key)
+                this.view.setEndIndex(cursor.key + 1)
                 console.log('End index: ' + cursor.key)
+            } else {
+                this.view.setEndIndex(1)
             }
+            this.view.setProducts(this.products)
+            this.view.render()
         }
         store.openCursor(null, 'prev').onerror = () => {
             console.log('Error retrieving end index')
@@ -93,9 +96,17 @@ export default class Model {
     }
 
     delete(index) {
-        let product = this.getByIndex(index)
-        if (product) {
+        const transaction = this.db.transaction(['Carrito'], 'readwrite')
+        const store = transaction.objectStore('Carrito')
+        const request = store.delete(index)
+        request.onsuccess = () => {
             this.products = this.products.filter((product) => product.id !== product.id)
+            this.view.table.removeChild(document.getElementById(index))
+            console.log('Product deleted successfully', index)
+        }
+
+        request.onerror = () => {
+            console.log('Error deleting product')
         }
     }
 

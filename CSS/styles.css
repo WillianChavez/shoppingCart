@@ -127,9 +127,9 @@ body {
 .add-products {
     display: flex;
     justify-content: space-around;
-    align-items: center;
     padding: 0 1.5rem;
     font-size: var(--font-size-text);
+    gap: 1rem;
 }
 .field__input,
 .submit {
@@ -141,14 +141,28 @@ body {
 .field__input {
     border-radius: 5px;
     height: 30px;
+    padding-left: 15px;
 
     font-size: var(--font-size-text);
-    text-align: center;
+    text-align: left;
     color: var(--black);
     transition: border-bottom 0.2s ease-in-out;
 }
 
-.field__input:focus {
+.price {
+    position: relative;
+    display: inline-block;
+}
+
+.price::after {
+    content: '$';
+    position: absolute;
+    top: 20%;
+    left: 5px;
+    font-size: var(--font-size-text);
+    color: var(--black);
+}
+*/ .field__input:focus {
     font-size: var(--font-size-text);
 }
 

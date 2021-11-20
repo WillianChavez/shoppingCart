@@ -1,28 +1,28 @@
 import View from './Components/View.js'
-import Controller from './Components/Controller.js'
 import Model from './Components/Model.js'
 
 const form = document.getElementById('formAddProducts')
-let view, controller, model
+let view, model
 
 addEventListener('load', () => {
     const dbName = 'ShoppingCart'
     const dbVersion = 1
     view = new View()
     model = new Model(dbName, dbVersion, view)
-    controller = new Controller(model, view)
+    view.setModel(model)
 })
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    console.log(e)
+
     const data = {
         name: e.target.name.value,
         price: e.target.price.value,
         quantity: e.target.amount.value,
+        id: view.endIndex,
     }
 
-    controller.addProduct({ ...data })
+    model.add(Object.assign({}, data))
 
     e.target.reset()
 })

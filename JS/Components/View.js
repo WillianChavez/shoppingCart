@@ -1,9 +1,13 @@
 export default class view {
-    constructor(model) {
+    constructor() {
         this.table = document.getElementById('table-products')
-        this.model = model
+        this.model
         this.products = []
         this.endIndex
+    }
+
+    setModel(model) {
+        this.model = model
     }
     render() {
         this.products.forEach((product) => {
@@ -15,21 +19,28 @@ export default class view {
         this.products = products
     }
 
-    insertRow({ name, price, quantity }) {
-        const row = this.createRow(name, price, quantity)
+    insertRow({ name, price, quantity, id }) {
+        const row = this.createRow(name, price, quantity, id)
         this.table.appendChild(row)
     }
 
     setEndIndex(index) {
+        if (index == undefined) {
+            this.endIndex = 0
+        } else {
+            this.endIndex = index
+        }
+    }
+    nextIndex() {
+        let index = parseInt(this.endIndex) + 1
         this.endIndex = index
     }
 
-    createRow(productName, productPrice, productQuantity) {
+    createRow(productName, productPrice, productQuantity, id) {
         let row = document.createElement('tr')
 
         row.classList.add('table__row-product')
-        row.setAttribute('id', this.endIndex)
-        this.endIndex++
+        row.setAttribute('id', id)
 
         let name = document.createElement('td')
         let price = document.createElement('td')
@@ -57,22 +68,11 @@ export default class view {
             console.log('edit', row.id)
         }
         removeButton.onclick = () => {
-            console.log('remove', row.id)
+            this.model.delete(parseInt(row.id))
         }
 
         row.append(name, price, quantity, controls)
         return row
-        // Scheme of row in table
-
-        // <tr class="table__row-product">
-        //     <td class="row-text">name</td>
-        //     <td class="row-text">price</td>
-        //     <td class="row-text">quantity</td>
-        //     <td class="controls">
-        //         <button class="material-icons-outlined material-icons button">edit</button>
-        //         <button class="material-icons-outlined material-icons icon-delete button">delete</button>
-        //     </td>
-        // </tr>
     }
 
     removeRow(id) {
