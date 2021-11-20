@@ -23,7 +23,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet" />
 
         <!--CSS-->
-        <link rel="stylesheet" href="./CSS/styles.css" />
+        <link rel="stylesheet" href="./CSS/config.css" />
+        <link rel="stylesheet" href="/CSS/header.css" />
+        <link rel="stylesheet" href="./css/addProducts.css" />
+        <link rel="stylesheet" href="./css/addedProducts.css" />
+        <link rel="stylesheet" href="./css/modal.css" />
         <title>Shopping Cart</title>
     </head>
     <body>
@@ -78,7 +82,37 @@
                     </table>
                 </section>
             </div>
-            <!--create a -->
+            <!-- modal -->
+            <div class="modal" id="modal-products">
+                <form class="modal__content">
+                    <div class="modal__header">
+                        <h2 class="modal__title">Product</h2>
+                        <span class="material-icons material-icons-outlined icon-close"> close </span>
+                    </div>
+                    <div class="modal__body">
+                        <div class="modal__field">
+                            <label for="modalName">Name:</label>
+                            <input type="text" name="modalName" id="modalName" class="modal__input" required autocomplete="off" />
+                        </div>
+
+                        <div class="modal__field">
+                            <label for="modalPrice">Price:</label>
+                            <div class="price">
+                                <input type="number" name="modalPrice" id="modalPrice" class="modal__input" required placeholder="0.00" autocomplete="off" />
+                            </div>
+                        </div>
+
+                        <div class="modal__field">
+                            <label for="modalAmount">Amount:</label>
+                            <input type="number" name="modalAmount" id="modalAmount" class="modal__input" required autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="modal__footer">
+                        <span class="material-icons material-icons-outlined icon-add-cart"> add_shopping_cart </span>
+                        <input type="submit" value="" class="submit" />
+                    </div>
+                </form>
+            </div>
         </main>
         <script src="./js/main.js" type="module"></script>
     </body>

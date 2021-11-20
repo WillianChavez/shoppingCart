@@ -4,6 +4,9 @@ import Model from './Components/Model.js'
 const form = document.getElementById('formAddProducts')
 let view, model
 
+const cloneJSON = (obj) => {
+    return JSON.parse(JSON.stringify(obj))
+}
 addEventListener('load', () => {
     const dbName = 'ShoppingCart'
     const dbVersion = 1
@@ -22,7 +25,7 @@ form.addEventListener('submit', (e) => {
         id: view.endIndex,
     }
 
-    model.add(Object.assign({}, data))
+    model.add(cloneJSON(data))
 
     e.target.reset()
 })
