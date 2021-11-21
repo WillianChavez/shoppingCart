@@ -90,6 +90,7 @@ export default class Model {
         let request = store.put(product)
 
         request.onsuccess = () => {
+            this.readData()
             console.log('Product updated successfully')
         }
 

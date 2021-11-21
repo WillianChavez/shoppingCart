@@ -1,8 +1,38 @@
 export default class view {
     constructor() {
         this.table = document.getElementById('table-products')
-        this.modal = document.getElementById('modal-product')
+        this.modal = document.getElementById('modal-products')
         this.model
+
+        this.modal.addEventListener('click', (e) => {
+            const action = e.target.dataset.action
+            if (action == 'close') {
+                this.closeModal()
+            }
+        })
+
+        this.modal.addEventListener('submit', (e) => {
+            event.preventDefault()
+
+            let name, price, quantity
+
+            name = e.target.modalName.value
+
+            price = e.target.modalPrice.value
+            price = parseFloat(price).toFixed(2)
+
+            quantity = e.target.modalQuantity.value
+
+            // model product object
+            const data = {
+                name,
+                price,
+                quantity,
+            }
+
+            this.model.update(this.cloneJSON(data))
+            this.closeModal()
+        })
     }
 
     setModel(model) {
@@ -57,5 +87,33 @@ export default class view {
         return row
     }
 
-    showModal() {}
+    showModal(row) {
+        const name = row.children[0].textContent
+        // prince is $###.## with slice to remove $
+        const price = row.children[1].textContent.slice(1)
+        const quantity = row.children[2].textContent
+
+        this.setDataModal(name, price, quantity)
+
+        this.modal.classList.remove('hidden')
+    }
+
+    closeModal() {
+        this.modal.classList.add('hidden')
+    }
+
+    setDataModal(name, price, quantity) {
+        const modalName = this.modal.querySelector('input[name="modalName"]')
+        const modalPrice = this.modal.querySelector('input[name="modalPrice"]')
+        const modalQuantity = this.modal.querySelector('input[name="modalQuantity"]')
+
+        modalName.value = name
+        modalPrice.value = price
+        modalQuantity.value = quantity
+    }
+
+    // return the clone of some object
+    cloneJSON(obj) {
+        return JSON.parse(JSON.stringify(obj))
+    }
 }

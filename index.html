@@ -87,7 +87,7 @@
                 <form class="modal__content">
                     <div class="modal__header">
                         <h2 class="modal__title">Product</h2>
-                        <span class="material-icons material-icons-outlined icon-close"> close </span>
+                        <span class="material-icons material-icons-outlined icon-close" data-action="close"> close </span>
                     </div>
                     <div class="modal__body">
                         <div class="modal__field">
@@ -98,7 +98,7 @@
                         <div class="modal__field">
                             <label for="modalPrice">Price:</label>
                             <div class="price">
-                                <input type="number" name="modalPrice" id="modalPrice" class="modal__input" required placeholder="0.00" autocomplete="off" />
+                                <input type="number" name="modalPrice" id="modalPrice" class="modal__input" step="any" required placeholder="0.00" autocomplete="off" />
                             </div>
                         </div>
 
@@ -109,7 +109,7 @@
                     </div>
                     <div class="modal__footer">
                         <span class="material-icons material-icons-outlined icon-add-cart"> add_shopping_cart </span>
-                        <input type="submit" value="" class="submit" />
+                        <input type="submit" value="" class="submit" data-action="add" />
                     </div>
                 </form>
             </div>
